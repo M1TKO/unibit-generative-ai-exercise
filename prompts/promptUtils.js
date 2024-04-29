@@ -1,36 +1,41 @@
 // file: /prompts/promptUtils.js
+
 export function getSystemPrompt() {
   return {
     role: "system",
-    content: "You are a helpful assistant that specializes in generating creative pet names.",
+    content: "You are a helpful assistant specializing in generating creative and effective brand names and taglines.",
   };
 }
 
 export function getUserPrompt(input) {
   return {
     role: "user",
-    content: `Generate a creative pet name and short description for a ${input}.`,
+    content: `Generate a list of brand names and taglines for a business that focuses on ${input.keywords}. The business values are ${input.values}.`,
   };
 }
 
 export function getFunctions() {
   return [
     {
-      name: "generate_pet_name",
-      description: "Generate a pet name for an animal.",
+      name: "generate_brand_names",
+      description: "Generate brand names and taglines based on business type, values, and keywords.",
       parameters: {
         type: "object",
         properties: {
-          animalPetName: {
+          brandName: {
             type: "string",
-            description: "The generated pet name for the animal",
+            description: "The generated brand name",
           },
-          description: {
+          tagline: {
             type: "string",
-            description: "The generated explanation of the pet name",
+            description: "The generated tagline for the brand",
+          },
+          explanation: {
+            type: "string",
+            description: "Why the name and tagline fit the business",
           },
         },
-        "required": ["animalPetName", "description"]
+        "required": ["brandName", "tagline", "explanation"]
       },
     },
   ];
